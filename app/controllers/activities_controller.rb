@@ -1,5 +1,5 @@
 class ActivitiesController < ApplicationController
-  before_action :set_activity, only: [:show, :edit, :update, :destroy]
+  before_action :set_activity, only: [:show, :edit, :update, :destroy, :reset]
 
   # GET /activities
   # GET /activities.json
@@ -58,6 +58,19 @@ class ActivitiesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to activities_url, notice: 'Activity was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def reset
+    respond_to do |format|
+      datetime = (params[:reset_date] + " " +  params[:reset_time]).to_datetime
+      if @activity.resets.create({datetime: datetime})
+        format.html { render :show }
+        format.json { render :show, status: ok }
+      else
+        format.html { render :show }
+        format.json { render json: @activity.errors, status: :unprocessable_entity }
+      end
     end
   end
 

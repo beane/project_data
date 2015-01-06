@@ -5,5 +5,17 @@
   <%= @activity.name %>
 </p>
 
+<%= form_tag("/activities/#{@activity.id}/reset", method: "post") do %>
+  <%= label_tag(:reset_date, "Reset date:") %>
+  <%= date_field_tag(:reset_date) %>
+  <br>
+
+  <%= label_tag(:reset_time, "Reset time:") %>
+  <%= time_field_tag(:reset_time) %>
+  <br>
+
+  <%= submit_tag("Reset") %>
+<% end %>
+
 <%= link_to 'Edit', edit_activity_path(@activity) %> |
 <%= link_to 'Back', activities_path %>
