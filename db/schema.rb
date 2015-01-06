@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150106175245) do
+ActiveRecord::Schema.define(version: 20150106190157) do
 
   create_table "activities", force: :cascade do |t|
     t.string   "name",       limit: 255, null: false
@@ -21,4 +21,15 @@ ActiveRecord::Schema.define(version: 20150106175245) do
 
   add_index "activities", ["name"], name: "index_activities_on_name", unique: true, using: :btree
 
+  create_table "resets", force: :cascade do |t|
+    t.datetime "datetime",              null: false
+    t.integer  "activity_id", limit: 4, null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  add_index "resets", ["activity_id"], name: "index_resets_on_activity_id", using: :btree
+  add_index "resets", ["datetime"], name: "index_resets_on_datetime", using: :btree
+
+  add_foreign_key "resets", "activities"
 end
