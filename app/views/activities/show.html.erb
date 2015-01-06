@@ -7,7 +7,7 @@
 
 <p>
   <strong>Last Reset:</strong>
-  <%= @activity.last_reset.datetime %>
+  <%= @activity.last_reset.datetime_display %>
 </p>
 
 <%= form_tag("/activities/#{@activity.id}/reset", method: "post") do %>
