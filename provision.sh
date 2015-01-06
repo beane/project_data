@@ -4,7 +4,7 @@ sourcify() {
 }
 
 sudo apt-get update && sudo apt-get install --only-upgrade bash # anti-shellshock
-sudo apt-get -y install git vim curl wget htop
+sudo apt-get -y install git vim curl wget htop screen nodejs
 
 PROJECT_ROOT="/vagrant"
 
@@ -42,8 +42,6 @@ sudo apt-get -y install mysql-client libmysqlclient-dev # seriously, the mysql g
 
 # load timezone info into mysql
 mysql_tzinfo_to_sql /usr/share/zoneinfo/
-
-sudo apt-get -y install nodejs
 
 # sudo apt-get -y install mongodb
 
