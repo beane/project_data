@@ -5,6 +5,11 @@
   <%= @activity.name %>
 </p>
 
+<p>
+  <strong>Last Reset:</strong>
+  <%= @activity.last_reset.datetime %>
+</p>
+
 <%= form_tag("/activities/#{@activity.id}/reset", method: "post") do %>
   <%= label_tag(:reset_date, "Reset date:") %>
   <%= date_field_tag(:reset_date) %>
