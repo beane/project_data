@@ -1,5 +1,5 @@
 class Activity < ActiveRecord::Base
-  require 'datetime_helper' # it's hiding in lib/
+  require 'datetime_helper' # this helper is hiding in lib/
   include DateTimeHelper # defines `difference_in_days`
 
   has_many :resets
