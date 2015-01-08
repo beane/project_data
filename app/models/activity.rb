@@ -2,7 +2,7 @@ class Activity < ActiveRecord::Base
   require 'datetime_helper' # this helper is hiding in lib/
   include DateTimeHelper # defines `difference_in_days`
 
-  has_many :resets
+  has_many :resets, dependent: :destroy
 
   validates :name, presence: true, uniqueness: true
 
