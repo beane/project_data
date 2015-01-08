@@ -7,7 +7,13 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 smoking = Activity.create(name: 'Smoking')
-1.upto(7) { |num| smoking.resets.create({ datetime: num.days.ago }) }
+1.upto(7) do |num|
+  next if [2,3,4].include?(num) # introduce skips
+  smoking.resets.create({ datetime: num.days.ago })
+end
 
 num_3 = Activity.create(name: "#3")
-1.upto(14) { |num| num_3.resets.create({ datetime: num.days.ago }) }
+1.upto(14) do |num|
+  next if [2,3,4,7,8,9,10].include?(num) # introduce skips
+  num_3.resets.create({ datetime: num.days.ago })
+end
