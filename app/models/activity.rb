@@ -60,21 +60,23 @@ class Activity < ActiveRecord::Base
       FROM (
 
         # selects 2 columns:
-        #   - a datetime from the resets table
-        #   - the next consecutive datetime found in the table
+        #   - a datetime from resets
+        #   - the next consecutive datetime in the table
 
         SELECT r1.datetime, (
 
-          # selects the next consecutive datetime
+          # selects the next consecutive datetime in the table
 
           SELECT r2.datetime
           FROM resets r2
           WHERE r2.datetime > r1.datetime
+          AND r2.activity_id = ?
           ORDER BY datetime ASC
           LIMIT 1
         ) next_datetime
 
         FROM resets r1
+        WHERE r1.activity_id = ?
       ) r
 
       WHERE r.datetime IS NOT NULL
@@ -83,7 +85,7 @@ class Activity < ActiveRecord::Base
       LIMIT 1
     SQL
 
-    results = Reset.find_by_sql(query).first
+    results = Reset.find_by_sql([query, self.id, self.id]).first
     [results.datetime.to_datetime, results.next_datetime.to_datetime]
   end
 end
