@@ -61,6 +61,8 @@ class ActivitiesController < ApplicationController
     end
   end
 
+  # POST /activities/1/reset
+  # POST /activities/1/reset.json
   def reset
     respond_to do |format|
       datetime = (params[:reset_date] + " " +  params[:reset_time]).to_datetime
